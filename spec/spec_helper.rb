@@ -4,7 +4,6 @@ require File.expand_path 'lib/simple_hubspot'
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f}
 
-require 'rspec/json_expectations'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
