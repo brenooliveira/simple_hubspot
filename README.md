@@ -28,8 +28,10 @@ require 'simple_hubspot'
 
 Setting your `hapikey`
 
-```
-SimpleHubspot.configure(hapikey: "YOUR API KEY")
+```ruby
+SimpleHubspot.configure do |config|
+  config.hapikey: "YOUR API KEY"
+end
 ```
 
 ## Development
