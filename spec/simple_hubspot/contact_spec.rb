@@ -6,7 +6,7 @@ describe SimpleHubspot::Contact do
       config.hapikey = 'YOUR-OWN-API-KEY'
     end
 
-    stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email?hapikey=YOUR-OWN-API-KEY")
+    stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/email@simplehubspot.com?hapikey=YOUR-OWN-API-KEY")
       .with(body: /^.*$/, headers: { "Content-Type" => "application/json" })
       .to_return(body: '{ "vid": "1234" }')
   end
