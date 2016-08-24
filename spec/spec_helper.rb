@@ -6,6 +6,8 @@ Dir["./spec/support/**/*.rb"].sort.each { |f| require f}
 
 require 'webmock/rspec'
 
+RestClient.log = 'stdout' if ENV['HTTP_DEBUG']
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

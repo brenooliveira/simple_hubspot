@@ -4,7 +4,7 @@ module SimpleHubspot
     class << self
 
       def create_or_update(email, params)
-        ApiClient.do_post "/contacts/v1/contact/createOrUpdate/email/#{email}", Utils.hash_to_properties(params)
+        ApiClient.do_post "/contacts/v1/contact/createOrUpdate/email/#{email}", { properties: Utils.hash_to_properties(params) }
       end
 
     end
