@@ -6,6 +6,9 @@ module SimpleHubspot
         response = RestClient.post "#{SimpleHubspot.configuration.api_base}#{path}#{add_apikey}", params.to_json, { content_type: :json }
         json = JSON.parse(response.body, symbolize_names: true)
         json.merge(success: true)
+      rescue RestClient::BadRequest => e
+        json = JSON.parse(e.response.body, symbolize_names: true)
+        json.merge(success: false)
       end
 
       private

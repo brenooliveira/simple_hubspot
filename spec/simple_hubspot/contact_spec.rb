@@ -1,23 +1,42 @@
 require 'spec_helper'
 
 describe SimpleHubspot::Contact do
-  before do
+  before :all do
     SimpleHubspot.configure do |config|
       config.hapikey = 'YOUR-OWN-API-KEY'
     end
-
-    stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/email@simplehubspot.com?hapikey=YOUR-OWN-API-KEY")
-      .with(body: /^.*$/, headers: { "Content-Type" => "application/json" })
-      .to_return(body: '{ "vid": "1234" }')
   end
 
   context ".create_or_update" do
-    let(:response) do
-      params = { email: 'email@simplehubspot.com', name: 'breno oliveira', github: 'brenooliveira', twitter: 'brenoholivira' }
-      SimpleHubspot::Contact.create_or_update 'email@simplehubspot.com', params
+    context 'when success on create contact' do
+      before do
+        stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/email@simplehubspot.com?hapikey=YOUR-OWN-API-KEY")
+        .with(body: /^.*$/, headers: { "Content-Type" => "application/json" })
+        .to_return(body: '{ "vid": "1234" }')
+      end
+
+      let(:response) do
+        params = { email: 'email@simplehubspot.com', name: 'breno oliveira', github: 'brenooliveira', twitter: 'brenoholivira' }
+        SimpleHubspot::Contact.create_or_update 'email@simplehubspot.com', params
+      end
+
+      it { expect(response[:success]).to be_truthy }
+      it { expect(response[:vid]).to eq '1234' }
     end
 
-    it { expect(response[:success]).to be_truthy }
-    it { expect(response[:vid]).to eq '1234' }
+    context 'when fail on create contact' do
+      before do
+        stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/email@simplehubspot.com?hapikey=YOUR-OWN-API-KEY")
+        .with(body: /^.*$/, headers: { "Content-Type" => "application/json" })
+        .to_return(status: 400, body: '{"status":"error","message":"Invalid JSON input: No content to map due to end-of-input","correlationId":"455a5308","requestId":"fabc6e62"}')
+      end
+      let(:response) do
+        SimpleHubspot::Contact.create_or_update 'email@simplehubspot.com', {email: ""}
+      end
+
+      it { expect(response[:status]).to eq 'error' }
+      it { expect(response[:success]).to be_falsy }
+    end
   end
+
 end
