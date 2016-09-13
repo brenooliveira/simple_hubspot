@@ -30,6 +30,12 @@ require 'simple_hubspot'
 Setting your `hapikey` you can create a new file in initializers from Rails
 
 ```ruby
+rails g simple_hubspot:install
+```
+
+#### Without Rails
+
+```ruby
 SimpleHubspot.configure do |config|
   config.hapikey: "YOUR API KEY"
 end
