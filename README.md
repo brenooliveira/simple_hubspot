@@ -38,8 +38,14 @@ end
 #### Create Or Update Contact
 
 ```ruby
-
+SimpleHubspot.create_or_update "email@email.com", { name: "John", age: 14, country: 'BRAZIL' }
 ```
+
+#### Find by e-mail
+```ruby
+SimpleHubspot.find_by_email "email@email.com"
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
