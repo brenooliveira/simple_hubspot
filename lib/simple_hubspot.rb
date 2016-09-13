@@ -28,4 +28,6 @@ module SimpleHubspot
       @api_base = 'https://api.hubapi.com'
     end
   end
+
+  require 'simple_hubspot/railtie' if defined?(Rails)
 end

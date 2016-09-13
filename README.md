@@ -1,4 +1,5 @@
 # SimpleHubspot
+[![Gem Version](https://badge.fury.io/rb/simple_hubspot.svg)](https://badge.fury.io/rb/simple_hubspot) [![Build Status](https://travis-ci.org/brenooliveira/simple_hubspot.svg?branch=master)](https://travis-ci.org/brenooliveira/simple_hubspot) [![Code Climate](https://codeclimate.com/github/brenooliveira/simple_hubspot/badges/gpa.svg)](https://codeclimate.com/github/brenooliveira/simple_hubspot)
 
 SimpleHubspot Gem is a pure light-weight implementation for Hubspot API
 
@@ -26,12 +27,29 @@ Or install it yourself as:
 require 'simple_hubspot'
 ```
 
-Setting your `hapikey`
+Setting your `hapikey` you can create a new file in initializers from Rails
+
+```ruby
+rails g simple_hubspot:install
+```
+
+#### Without Rails
 
 ```ruby
 SimpleHubspot.configure do |config|
   config.hapikey: "YOUR API KEY"
 end
+```
+
+#### Create Or Update Contact
+
+```ruby
+SimpleHubspot.create_or_update "email@email.com", { name: "John", age: 14, country: 'BRAZIL' }
+```
+
+#### Find by e-mail
+```ruby
+SimpleHubspot.find_by_email "email@email.com"
 ```
 
 ## Development

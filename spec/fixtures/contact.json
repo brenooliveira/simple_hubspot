@@ -1,0 +1,39 @@
+{
+"vid": 958319228,
+"canonical-vid": 95819228,
+"merged-vids": [
+
+],
+"portal-id": 253924,
+"is-contact": true,
+"profile-token": "AO",
+"profile-url": "https://app.hubspot.com/contacts/",
+"properties": {
+    "lead_source_new": {
+        "value": "account creation form",
+        "versions": [
+            {
+                "value": "account creation form",
+                "source-type": "WORKFLOWS",
+                "source-id": "976540",
+                "source-label": null,
+                "timestamp": 1473468446001,
+                "selected": false
+            }
+        ]
+    },
+    "hs_analytics_last_url": {
+        "value": "",
+        "versions": [
+            {
+                "value": "",
+                "source-type": "ANALYTICS",
+                "source-id": "ContactAnalyticsDetailsUpdateWorker",
+                "source-label": null,
+                "timestamp": 1473468439642,
+                "selected": false
+            }
+        ]
+    }
+  }
+}
