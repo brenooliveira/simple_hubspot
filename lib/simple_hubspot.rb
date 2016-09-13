@@ -8,6 +8,7 @@ require 'logger'
 require 'simple_hubspot/utils'
 require 'simple_hubspot/api_client'
 require 'simple_hubspot/contact'
+require 'simple_hubspot/generators/simple_hubspot/simple_hubspot_generator'
 
 module SimpleHubspot
 
