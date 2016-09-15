@@ -61,4 +61,30 @@ describe SimpleHubspot::Contact do
       it { expect(response[:success]).to be_falsy }
     end
   end
+
+  context '.update' do
+    context 'when update success' do
+      before do
+        stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/vid/1234/profile?hapikey=YOUR-OWN-API-KEY").with(body: /^.*$/, headers: { "Content-Type" => "application/json" }).to_return(status: 204)
+      end
+
+      let(:response) { SimpleHubspot::Contact.update 1234, { email: "test@gmail.com" } }
+
+      it { expect(response[:success]).to be_truthy }
+    end
+
+    context 'when fail update' do
+      before do
+        stub_request(:post, "https://api.hubapi.com/contacts/v1/contact/vid/1234/profile?hapikey=YOUR-OWN-API-KEY").with(body: /^.*$/, headers: { "Content-Type" => "application/json" }).to_return(status: 400)
+      end
+
+      let(:response) { SimpleHubspot::Contact.update 1234, { missing_field: "any_value" } }
+
+      it { expect(response[:success]).to be_falsy }
+    end
+
+    context 'when vid is nil' do
+      it { expect { SimpleHubspot::Contact.update(nil, {}) }.to raise_error ArgumentError }
+    end
+  end
 end

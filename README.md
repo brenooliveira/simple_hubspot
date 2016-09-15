@@ -37,19 +37,24 @@ rails g simple_hubspot:install
 
 ```ruby
 SimpleHubspot.configure do |config|
-  config.hapikey: "YOUR API KEY"
+  config.hapikey= "YOUR API KEY"
 end
 ```
 
 #### Create Or Update Contact
 
 ```ruby
-SimpleHubspot.create_or_update "email@email.com", { name: "John", age: 14, country: 'BRAZIL' }
+SimpleHubspot::Contact.create_or_update "email@email.com", { name: "John", age: 14, country: 'BRAZIL' }
 ```
 
 #### Find by e-mail
 ```ruby
-SimpleHubspot.find_by_email "email@email.com"
+SimpleHubspot::Contact.find_by_email "email@email.com"
+```
+
+#### Update Contact
+```ruby
+SimpleHubspot::Contact.update 1234,  { email: "email@email.com" }
 ```
 
 ## Development

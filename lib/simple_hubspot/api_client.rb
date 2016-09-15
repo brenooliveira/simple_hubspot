@@ -23,11 +23,13 @@ module SimpleHubspot
         end
 
         def response_fail(response = {})
+          return { success: false } if response.empty?
           json = JSON.parse(response, symbolize_names: true)
           json.merge(success: false)
         end
 
         def response_success(response = {})
+          return { success: true } if response.empty?
           json = JSON.parse(response, symbolize_names: true)
           json.merge(success: true)
         end
