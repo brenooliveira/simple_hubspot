@@ -8,6 +8,7 @@ require 'logger'
 require 'simple_hubspot/utils'
 require 'simple_hubspot/api_client'
 require 'simple_hubspot/contact'
+require 'simple_hubspot/form'
 
 module SimpleHubspot
 
@@ -21,11 +22,13 @@ module SimpleHubspot
   end
 
   class Configuration
-    attr_accessor :hapikey, :api_base
+    attr_accessor :hapikey, :api_base, :portal_id, :form_submit_base
 
     def initialize
       @hapikey = ''
+      @portal_id = ''
       @api_base = 'https://api.hubapi.com'
+      @form_submit_base = 'https://forms.hubspot.com/uploads/form/v2/'
     end
   end
 

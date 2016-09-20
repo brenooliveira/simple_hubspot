@@ -8,3 +8,6 @@
 /spec/reports/
 /tmp/
 *.gem
+.ruby-gemset
+.ruby-version
+*.sublime-*

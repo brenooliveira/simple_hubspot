@@ -17,6 +17,17 @@ module SimpleHubspot
         response_fail e.response.body
       end
 
+      def do_form_post(guid = nil, params = {}, headers = {})
+        response = RestClient.post "#{SimpleHubspot.configuration.form_submit_base}#{SimpleHubspot.configuration.portal_id}/#{guid}",
+                                   params.to_json,
+                                   { content_type: 'application/x-www-form-urlencoded'}
+        response_success response.body
+      rescue RestClient::BadRequest => e
+        response_fail e.response.body
+      rescue RestClient::NotFound => e
+        response_fail e.response.body
+      end
+
       private
         def add_apikey
           "?hapikey=#{SimpleHubspot.configuration.hapikey}"
