@@ -57,6 +57,18 @@ SimpleHubspot::Contact.find_by_email "email@email.com"
 SimpleHubspot::Contact.update 1234,  { email: "email@email.com" }
 ```
 
+#### Submit a Form
+```ruby
+payload = { email: 'test@example.com',
+            property_one: 'value 1',
+            property_two: 'value 2',
+            hs_context: { hutk: '60c2ccdfe4892f0fa0593940b12c11aa',
+                          ipAddress: '127.0.0.10',
+                          pageUrl: 'http://demo.hubapi.com/contact/',
+                          pageName: 'Contact Us' } }
+SimpleHubspot::Form.submit_form 'FORM_GUID', payload
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
