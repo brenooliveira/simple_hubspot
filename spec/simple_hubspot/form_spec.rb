@@ -12,7 +12,7 @@ describe SimpleHubspot::Form do
     context 'when submit success' do
       before do
         stub_request(:post, "https://forms.hubspot.com/uploads/form/v2/PORTAL_ID/FORM_ID")
-        .with(body: /^.*$/, headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+        .with(body: /^.*$/, headers: { "Content-Type" => "application/x-www-form-urlencoded" }, body: URI.encode_www_form(expected_request))
         .to_return(status: 204)
 
         @payload = { email: 'test@example.com', 
@@ -22,6 +22,11 @@ describe SimpleHubspot::Form do
                                   pageName: 'Contact Us' } }
       end
       let(:response) { SimpleHubspot::Form.submit_form 'FORM_ID', @payload }
+      let(:expected_request) { { email: 'test@example.com',
+                                  hs_context: ({ hutk: '60c2ccdfe4892f0fa0593940b12c11aa',
+                                                ipAddress: '127.0.0.10',
+                                                pageUrl: 'http://demo.hubapi.com/contact/',
+                                                pageName: 'Contact Us' }).to_json } }
 
       it { expect(response[:success]).to be_truthy }
     end
@@ -39,7 +44,6 @@ describe SimpleHubspot::Form do
                                   pageName: 'Contact Us' } }
       end
       let(:response) { SimpleHubspot::Form.submit_form 'FORM_ID', @payload }
-
       it { expect(response[:success]).to be_falsy }
     end
 
