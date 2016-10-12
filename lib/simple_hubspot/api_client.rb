@@ -18,8 +18,11 @@ module SimpleHubspot
       end
 
       def do_form_post(guid = nil, params = {}, headers = {})
+        if params[:hs_context]
+          params[:hs_context] = params[:hs_context].to_json
+        end
         response = RestClient.post "#{SimpleHubspot.configuration.form_submit_base}#{SimpleHubspot.configuration.portal_id}/#{guid}",
-                                   params.to_json,
+                                   URI.encode_www_form(params),
                                    { content_type: 'application/x-www-form-urlencoded'}
         response_success response.body
       rescue RestClient::BadRequest => e
