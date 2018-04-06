@@ -27,7 +27,8 @@ Or install it yourself as:
 require 'simple_hubspot'
 ```
 
-Setting your `hapikey` you can create a new file in initializers from Rails
+Setting your `hapikey` you can create a new file in initializers from Rails.
+To submit a form you need to add your `portal_id` to the configure file.
 
 ```ruby
 rails g simple_hubspot:install
@@ -38,6 +39,7 @@ rails g simple_hubspot:install
 ```ruby
 SimpleHubspot.configure do |config|
   config.hapikey= "YOUR API KEY"
+  config.portal_id = "YOUR PORTAL ID"
 end
 ```
 
